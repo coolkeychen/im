@@ -37,3 +37,8 @@ npm install redux --save
 ```
 npm run eject
 ```
+
+5. ### ES6 语法
+* 新的 javascript 语法标准
+* 使用 babel 语法转换器，支持低端浏览器
+* 流行的库基本上都基于ES6构建，React 默认使用 ES6 新语法开发

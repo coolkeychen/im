@@ -3,14 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore } from 'redux';
-import { counter, addGun, removeGun } from './store/index'
-const store = createStore(counter);
+import { createStore,applyMiddleware } from 'redux';
+import thunk  from 'redux-thunk'
+import { counter, addGun, removeGun,addGunAsync } from './store/index'
+const store = createStore(counter, applyMiddleware(thunk));
 
 function render() {  
   ReactDOM.render(
     <React.StrictMode>
-      <App store={store} addGun={addGun} removeGun = {removeGun}/>
+      <App store={store} addGun={addGun} removeGun = {removeGun} addGunAsync= {addGunAsync}/>
     </React.StrictMode>,
     document.getElementById('root')
   );

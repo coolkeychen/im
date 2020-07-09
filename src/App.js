@@ -51,6 +51,7 @@ class App extends React.Component{
     const num = store.getState();
     const addGun = this.props.addGun;
     const removeGun = this.props.removeGun;
+    const addGunAsync = this.props.addGunAsync;
     return (
       <div>
         <h1>现在有机枪{num}把</h1>
@@ -62,6 +63,7 @@ class App extends React.Component{
         </ul>
         <Button type="primary" onClick={()=>store.dispatch(addGun())}>申请机枪</Button>
         <Button type="warning" onClick={()=>store.dispatch(removeGun())}>上交机枪</Button>
+        <Button type="warning" onClick={()=>store.dispatch(addGunAsync())}>拖两天再给</Button>
       </div>
     )
   }

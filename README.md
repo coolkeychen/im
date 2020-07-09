@@ -111,3 +111,21 @@ yarn add mongoose -S
    * 把 store.dispatch 方法传递给组件，内部可以调用修改状态
    * Subscribe 订阅render 函数，每次修改都重新渲染
    * Redux相关内容，移到单独的文件 index redux.js 单独管理
+13. 更进一步处理异步、调试工具、更优雅的和 react 结合
+   * Redux 处理异步，需要 redux-thunk 插件
+   * Npm install redux-devtools-extension并且开启
+   * 使用 react-redux 优雅的链接 react和 redux
+   ```
+   yarn add redux-thunk -S
+   ```
+   * 处理异步
+      + Redux 默认只处理同步，异步任务需要 react-thunk 中间件
+      + 使用 applyMiddleware 开启 thunk 中间件
+      + Action 可以返回函数，使用 dispathch 提交 action
+14. 使用 react-redux
+   ```
+   npm install react-redux --save
+   ```
+   * 忘记subscribe,记住 reducer, action 和 dispatch 即可
+   * React-redux 提供 Provider 和 connect 两个接口来链接
+   * Provider 组件在应用最外层，传入 store 即可，只用一次

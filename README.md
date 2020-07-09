@@ -107,3 +107,7 @@ yarn add mongoose -S
    * 首先通过 reducer 新建 store, 随时通过 store.getState 获取状态
    * 需要状态变更， store.dispatch (action) 来修改状态
    * Reducer 函数接受state和action,返回新的state, 可以用 store.subscribe 监听每次修改
+12. Redux如何和 React一起用
+   * 把 store.dispatch 方法传递给组件，内部可以调用修改状态
+   * Subscribe 订阅render 函数，每次修改都重新渲染
+   * Redux相关内容，移到单独的文件 index redux.js 单独管理

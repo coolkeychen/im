@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {createStore} from 'redux';
+import { addGun } from './store/index'
 import { Button } from 'antd-mobile';
 // function App() {
 //   return (
@@ -48,14 +47,21 @@ class App extends React.Component{
   }
   render() {
     console.log('组件正在加载了')
+    const store = this.props.store;
+    const num = store.getState();
+    const addGun = this.props.addGun;
+    const removeGun = this.props.removeGun;
     return (
       <div>
+        <h1>现在有机枪{num}把</h1>
         <Button type="primary" onClick={this.addSolder}>新兵入伍</Button>
         <ul>
           {this.state.solders.map(item => {
             return <li key={item}>{item}</li>
           })}
         </ul>
+        <Button type="primary" onClick={()=>store.dispatch(addGun())}>申请机枪</Button>
+        <Button type="warning" onClick={()=>store.dispatch(removeGun())}>上交机枪</Button>
       </div>
     )
   }

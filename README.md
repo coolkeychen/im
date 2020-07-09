@@ -129,3 +129,13 @@ yarn add mongoose -S
    * 忘记subscribe,记住 reducer, action 和 dispatch 即可
    * React-redux 提供 Provider 和 connect 两个接口来链接
    * Provider 组件在应用最外层，传入 store 即可，只用一次
+   * Connect 负责从外部获取组件需要的参数
+   * Connect 可以用装饰器的方式来写
+   * 使用装饰器优化 connect 代码
+      + npm run eject 弹出个性化配置
+      + npm install babel-plugin-transform-decorators-legacy --save-dev 插件
+      + package.json 里 babel 加上 plugins 配置
+      ```
+      ["@babel/plugin-proposal-decorators", { "legacy": true }]
+      ```
+15. React-router4 基础知识

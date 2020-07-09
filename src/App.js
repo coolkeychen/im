@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
-import { addGun } from './store/index'
+import { addGun,removeGun,addGunAsync } from './store/index'
 import { Button } from 'antd-mobile';
+import { connect } from "react-redux";
 // function App() {
 //   return (
 //     <div className="App">
@@ -22,6 +23,24 @@ import { Button } from 'antd-mobile';
 //     </div>
 //   );
 // }
+
+/* const mapStatetoProps = (state) => {
+  return { num: state }
+}
+
+const actionCreators = { addGun, removeGun, addGunAsync}
+
+App = connect(mapStatetoProps,actionCreators)(App) 
+*/
+
+
+@connect(
+  // 你要什么state 放在 props里
+  (state) => ({num: state}),
+  // 你要什么方法，放在 props 里， 自动 dispath
+  { addGun, removeGun, addGunAsync}
+)
+
 class App extends React.Component{
   constructor(props) {
     super(props)
@@ -47,11 +66,12 @@ class App extends React.Component{
   }
   render() {
     console.log('组件正在加载了')
-    const store = this.props.store;
-    const num = store.getState();
-    const addGun = this.props.addGun;
-    const removeGun = this.props.removeGun;
-    const addGunAsync = this.props.addGunAsync;
+    // const store = this.props.store;
+    // const num = store.getState();
+    // const addGun = this.props.addGun;
+    // const removeGun = this.props.removeGun;
+    // const addGunAsync = this.props.addGunAsync;
+    const num = this.props.num;
     return (
       <div>
         <h1>现在有机枪{num}把</h1>
@@ -61,12 +81,13 @@ class App extends React.Component{
             return <li key={item}>{item}</li>
           })}
         </ul>
-        <Button type="primary" onClick={()=>store.dispatch(addGun())}>申请机枪</Button>
-        <Button type="warning" onClick={()=>store.dispatch(removeGun())}>上交机枪</Button>
-        <Button type="warning" onClick={()=>store.dispatch(addGunAsync())}>拖两天再给</Button>
+        <Button type="primary" onClick={this.props.addGun}>申请机枪</Button>
+        <Button type="warning" onClick={this.props.removeGun}>上交机枪</Button>
+        <Button type="warning" onClick={this.props.addGunAsync}>拖两天再给</Button>
       </div>
     )
   }
 }
+
 
 export default App;

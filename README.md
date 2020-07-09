@@ -85,3 +85,25 @@ yarn add mongoose -S
 * mongoose 独立工具函数
 * express 使用 body-parser 支持 post参数
 * 使用 cookie-parser 存储登录信息 cookie
+8. React 语法
+   * 帮助你构建UI库
+   * 一切皆组件
+   * 全部使用ES6语法，Ver.16 版本核心代码重写，整体API变化不大
+9. React 生命周期
+   + 初始化周期
+   + 组件重新渲染生命周期
+   + 组件卸载声明周期
+10. 安装 antd-mobile UI库
+   ```
+   yarn add antd-mobile@next -S
+   ```
+   ```
+  
+   ```
+11. Redux
+   * Redux 专注于状态管理，和 React 解耦
+   * 单一状态，单向数据流
+   * 核心概念： store, state, action, reducer
+   * 首先通过 reducer 新建 store, 随时通过 store.getState 获取状态
+   * 需要状态变更， store.dispatch (action) 来修改状态
+   * Reducer 函数接受state和action,返回新的state, 可以用 store.subscribe 监听每次修改

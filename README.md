@@ -139,3 +139,15 @@ yarn add mongoose -S
       ["@babel/plugin-proposal-decorators", { "legacy": true }]
       ```
 15. React-router4 基础知识
+   * React 开发单页应用必备，践行路由即组件概念
+   * 核心概念：动态路由、Route、Link、Switch
+   ```
+   Npm install react-router-dom --save
+   yarn add react-router-dom -S
+   ```
+   * BrowseRouter, 包裹整个应用
+   * Router 路由对应渲染的组件，可嵌套
+   * Link 跳转专用
+   * url 参数， Route组件参数可用冒号标识参数
+   * Redirect 组件 跳转
+   * Switch 只渲染一个子 Route 组件

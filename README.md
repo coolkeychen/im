@@ -151,3 +151,7 @@ yarn add mongoose -S
    * url 参数， Route组件参数可用冒号标识参数
    * Redirect 组件 跳转
    * Switch 只渲染一个子 Route 组件
+   和redux 配合
+   * 复杂 redux 应用，多个 reducer, 用combineReducers 合并
+   * Redirect组件跳转
+   * Switch 只渲染一个子Route组件

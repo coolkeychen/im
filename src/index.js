@@ -6,16 +6,19 @@ import { createStore,applyMiddleware, compose } from 'redux';
 import thunk  from 'redux-thunk'
 import { BrowserRouter, Route, Link ,Redirect,Switch } from 'react-router-dom'
 import {Provider} from 'react-redux'
-import { counter } from './store/index'
+// import { counter } from './store/index'
 import Auth from "./Auth";
 import Dashboard from "./Dashboard";
+import reducers from './store/reducer'
 
 
-const store = createStore(counter, compose(
+const store = createStore(reducers, compose(
   applyMiddleware(thunk),
   window.detToolsExtenstion?window.detToolsExtenstion(): f=>f
 ));
+// const store = createStore(reducers)
 
+// console.log(store.getState());
 
 
 // class Test extends React.Component {

@@ -36,7 +36,8 @@ App = connect(mapStatetoProps,actionCreators)(App)
 
 @connect(
   // 你要什么state 放在 props里
-  (state) => ({num: state}),
+  // (state) => ({num: state}),
+  state => ({num: state.counter}),
   // 你要什么方法，放在 props 里， 自动 dispath
   { addGun, removeGun, addGunAsync}
 )

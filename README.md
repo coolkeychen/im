@@ -154,4 +154,32 @@ yarn add mongoose -S
    和redux 配合
    * 复杂 redux 应用，多个 reducer, 用combineReducers 合并
    * Redirect组件跳转
-   * Switch 只渲染一个子Route组件
+   * Switch 只渲染一个子Route组件   
+16. 项目骨架
+   1. src前端源码目录
+   2. server 后端 express目录
+   3. 核心功能文件夹：component, container,reducers等
+17. 页面骨架
+   * 进入应用时获取用户信息，用户未登录跳转 login 页面
+   * Login和Register页面不需要权限认证
+   * 用户信息，聊天列表，职位列表页面共享底部 tabbar
+   * Mongodb 字段设计
+   * axios 发送异步请求
+   * redux 管理所有数据，组件尽量用 antd-mobile, 弱化 css
+18. 前后端联调
+   * 使用 axios 发送异步请求
+      * 如何发送，端口不一致，使用 proxy 配置转发
+      * axios 拦截器，统一 loading 处理
+      * redux 里使用异步数据，渲染页面
+   * 安装  axios   
+   简洁好用的发送请求库
+   ```
+   npm install axios --save
+   ```
+   * 配置转发
+   ```
+   'proxy':'localhost:9093'
+   ```
+   * Axios.interceptors 设置拦截器，比如全局的 loading
+   * Axios.get, .post 发送请求， 返回 promise 对象
+   * Redux 里获取数据， 然后 dispath

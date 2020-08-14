@@ -10,6 +10,7 @@ import {Provider} from 'react-redux'
 import Auth from "./Auth";
 import Dashboard from "./Dashboard";
 import reducers from './store/reducer'
+import './tools/http'
 
 
 const store = createStore(reducers, compose(

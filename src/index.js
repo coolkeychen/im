@@ -10,6 +10,8 @@ import {Provider} from 'react-redux'
 import Auth from "./Auth";
 import Dashboard from "./Dashboard";
 import reducers from './store/reducer'
+import Login from "./container/login/login";
+import Resgister from "./container/register/register";
 import './tools/http'
 
 
@@ -36,8 +38,8 @@ ReactDOM.render(
   (<Provider store = {store}>
     <BrowserRouter>
       <Switch>
-        <Route path="/login" component={Auth}></Route>
-        <Route path="/dashboard" component={Dashboard}></Route>
+        <Route path="/login" component={Login}></Route>
+        <Route path="/register" component={Resgister}></Route>
         <Redirect to="/dashboard"></Redirect>
       </Switch>
       

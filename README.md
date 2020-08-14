@@ -183,3 +183,15 @@ yarn add mongoose -S
    * Axios.interceptors 设置拦截器，比如全局的 loading
    * Axios.get, .post 发送请求， 返回 promise 对象
    * Redux 里获取数据， 然后 dispath
+19. 页面文件结构
+   1. 骨架结构实现
+      * 组件放在 Component 文件夹下面
+      * 页面放在 Container 文件夹下面
+      * 页面入口处获取用户信息，决定跳转到哪个页面
+   2. 基于 cookie 用户验证
+      * express 依赖 cookie-parser
+      ```
+      npm install cookie-parser --save
+      ```
+      * cookie 类似于一张身份卡，登录后服务器端返回，你带着 cookie 就可以访问受限资源
+      * 页 cookie 的管理浏览器会自动处理

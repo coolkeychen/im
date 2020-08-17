@@ -17,7 +17,7 @@ class Register extends React.Component{
   }
 
   onChange(type) {
-    console.log('type','type')
+    console.log('type',type)
     this.setState({
       type
     })

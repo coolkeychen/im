@@ -15,11 +15,13 @@ class Login extends React.Component {
     return (
       <div>
         <Logo></Logo>
-        <List>
-          <InputItem>用户:</InputItem>
-          <WhiteSpace />
-          <InputItem>密码:</InputItem>
-        </List>
+        <WingBlank>
+          <List>
+            <InputItem>用户:</InputItem>
+            <WhiteSpace />
+            <InputItem>密码:</InputItem>
+          </List>
+        </WingBlank>
         <WhiteSpace />
         <WingBlank>
           <Button type="primary">登录</Button>

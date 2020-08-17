@@ -12,6 +12,7 @@ import Dashboard from "./Dashboard";
 import reducers from './store/reducer'
 import Login from "./container/login/login";
 import Resgister from "./container/register/register";
+import AuthRoute from "./component/authroute/authroute";
 import './tools/http'
 
 
@@ -38,6 +39,7 @@ ReactDOM.render(
   (<Provider store = {store}>
     <BrowserRouter>
       <Switch>
+        <AuthRoute></AuthRoute>
         <Route path="/login" component={Login}></Route>
         <Route path="/register" component={Resgister}></Route>
         <Redirect to="/dashboard"></Redirect>

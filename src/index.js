@@ -38,12 +38,16 @@ const store = createStore(reducers, compose(
 ReactDOM.render(
   (<Provider store = {store}>
     <BrowserRouter>
-      <Switch>
+      <div>
+
+      
+      {/* <Switch> */}
         <AuthRoute></AuthRoute>
         <Route path="/login" component={Login}></Route>
         <Route path="/register" component={Resgister}></Route>
-        <Redirect to="/dashboard"></Redirect>
-      </Switch>
+        {/* <Redirect to="/dashboard"></Redirect> */}
+      {/* </Switch> */}
+      </div>
       
     </BrowserRouter>
   </Provider>),

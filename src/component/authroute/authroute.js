@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import { withRouter } from 'react-router-dom';
 
 /**
  * 获取用户信息
@@ -8,14 +9,22 @@ import axios from "axios";
  * 用户的type 身份是 boss 还是 牛人
  * 用户是否完善信息（选择头像，个人简历）
  */
+
+ @withRouter
 class Authroute extends Component {
   componentDidMount() {
+    const publicList = ['/login','/register'];
+    const pathname  = this.props.location.pathname;
     axios.get('/user/info')
     .then(res=>{
       console.log('res',res)
-      // if (res.code ===200) {
-      //   console.log(res);
-      // }
+      if (res.status ===200) {
+        if (res.data.code === 0) {
+
+        } else {
+          console.log(this.props.history)
+        }
+      }
     })
   }
   render() {

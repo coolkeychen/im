@@ -6,3 +6,24 @@ mongoose.connect(DB_URL)
 mongoose.connection.on('connected',function (params) {
   console.log('mongo connect success');
 })
+
+const models = {
+  user : {
+    'user': { type: String, required: true },
+    'pwd': { type: String, required: true },
+    'type': { type: String, required: true },
+    'avatar': { type: String },
+    'desc': { type: String },
+    'title': { type: String },
+    'company': { type: String },
+    'money': { type: String}
+  },
+  chat : {
+
+  }
+}
+
+for (let m in models) {
+  const element = array[index];
+  
+}

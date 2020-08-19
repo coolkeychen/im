@@ -16,9 +16,12 @@ import AuthRoute from "./component/authroute/authroute";
 import './tools/http'
 
 
+
+
 const store = createStore(reducers, compose(
   applyMiddleware(thunk),
-  window.detToolsExtenstion?window.detToolsExtenstion(): f=>f
+  // window.detToolsExtenstion?window.detToolsExtenstion(): f=>f
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 ));
 // const store = createStore(reducers)
 

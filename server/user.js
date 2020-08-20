@@ -26,6 +26,17 @@ Router.post('/register',function (req, res) {
   })
 })
 
+Router.post('/login',function(req,res) {
+  console.log(req.body)
+  const {user,pwd} = req.body;
+  User.findOne({user,pwd}, function(err,doc) {
+    if (!doc) {
+      return res.json({code: 1, msg: '用户不存在或者密码错误！'})
+    }
+    return res.json({code: 0})
+  })
+})
+
 Router.get('/info',function (req,res) {
   return res.json({code:1})
 })

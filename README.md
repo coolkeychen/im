@@ -195,3 +195,7 @@ yarn add mongoose -S
       ```
       * cookie 类似于一张身份卡，登录后服务器端返回，你带着 cookie 就可以访问受限资源
       * 页 cookie 的管理浏览器会自动处理
+   3. 安装 body-parser
+      ```
+      yarn add body-parser --save
+      ```

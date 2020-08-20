@@ -1,11 +1,15 @@
 const express = require('express')
-
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const userRouter = require('./user')
 
 
 // 新建app
 const app = express()
-
+// 方便解析客户端传来的数据参数
+app.use(bodyParser.json())
+// 解析
+app.use(cookieParser())
 app.use('/user',userRouter);
 
 // 类似于 mysql 的表，mongo里有文档、字段的概念

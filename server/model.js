@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 
 // 链接 mongo
-const DB_URL = 'mongodb://127.0.0.1:27017/im'
+const DB_URL = 'mongodb://127.0.0.1:27017/im-chat'
 mongoose.connect(DB_URL)
-mongoose.connection.on('connected',function (params) {
-  console.log('mongo connect success');
-})
+// mongoose.connection.on('connected',function (params) {
+//   console.log('mongo connect success');
+// })
 
 const models = {
   user : {
@@ -24,6 +24,12 @@ const models = {
 }
 
 for (let m in models) {
-  const element = array[index];
+  mongoose.model(m, new mongoose.Schema(models[m]));
   
+}
+
+module.exports = {
+  getModel: function (name) {
+    return mongoose.model(name)
+  }
 }

@@ -5,7 +5,18 @@ import { List,InputItem,WingBlank,WhiteSpace,Button } from 'antd-mobile'
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      user: '',
+      pwd: '',
+    }
     this.register = this.register.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(key,val) {
+    this.setState({
+      [key]:val
+    })
   }
 
   register() {
@@ -17,9 +28,13 @@ class Login extends React.Component {
         <Logo></Logo>
         <WingBlank>
           <List>
-            <InputItem>用户:</InputItem>
+            <InputItem 
+              onChange={v=>this.handleChange('user',v)}>用户:</InputItem>
             <WhiteSpace />
-            <InputItem>密码:</InputItem>
+            <InputItem 
+              type="password"
+              onChange={v=>this.handleChange('pwd',v)}
+              >密码:</InputItem>
           </List>
         </WingBlank>
         <WhiteSpace />

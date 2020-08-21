@@ -3,6 +3,7 @@ import Logo from '../../component/logo/logo'
 import { List,InputItem,WingBlank,WhiteSpace,Button } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { login } from '../../store/user';
+import { Redirect } from "react-router-dom";
 import './login.css';
 
 @connect(
@@ -39,6 +40,7 @@ class Login extends React.Component {
   render() {
     return (
       <div>
+        {this.props.redirectTo? <Redirect to={this.props.redirectTo} />:null}
         <Logo></Logo>
         <WingBlank>
           {this.props.msg ? <p className="warn-tip">{this.props.msg}</p>: null}

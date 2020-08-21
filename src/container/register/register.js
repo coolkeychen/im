@@ -3,6 +3,7 @@ import Logo from '../../component/logo/logo';
 import { List,InputItem,Radio,WingBlank,WhiteSpace,Button,Toast } from 'antd-mobile';
 import { register } from '../../store/user'
 import { connect } from 'react-redux';
+import { Redirect } from "react-router-dom";
 import './register.css';
 
 
@@ -66,6 +67,7 @@ class Register extends React.Component{
         <Logo></Logo>
         <WingBlank>
           {this.props.msg ? <p className="warn-tip">{this.props.msg}</p>: null}
+          {this.props.redirectTo? <Redirect to={this.props.redirectTo} /> : null}
           <List>
             <InputItem onChange={v=>this.handleChange('user',v)}>用户:</InputItem>
             <InputItem 

@@ -1,10 +1,12 @@
 import axios from "axios";
+import {getRedirectPath} from '../tools/util';
 
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const ERROR_MSG = 'ERROR_MSG';
 
 const initState = {
+  redirectTo:'',
   isAuth: false,
   msg: '',
   user: '',
@@ -16,11 +18,11 @@ const initState = {
 export function user (state = initState ,action) {
   switch (action.type) {
     case REGISTER_SUCCESS:
-      return {...state,msg: '',isAuth: true,...action.payload};
+      return {...state,msg: '',redirectTo:getRedirectPath(action.payload), isAuth: true,...action.payload};
     case ERROR_MSG:
       return {...state,  isAuth: false, msg:action.payload }
     case LOGIN_SUCCESS:
-      return {...state, isAuth: true, ...action.payload}
+      return {...state,redirectTo:getRedirectPath(action.payload), isAuth: true, ...action.payload}
     default:
       return state;
   }
@@ -65,9 +67,11 @@ export function login(user, pwd) {
   return dispatch => {
     axios.post('/user/login',{user,pwd})
     .then(res => {
-      console.log(res);
+      // console.log(res);
       if (res.status === 200 && res.data.code === 0) {
-        return dispatch(loginSuccess({user,pwd}))
+        console.log(res.data.data)
+        // const {type,user,pwd} = res.data.data;
+        return dispatch(loginSuccess(res.data.data))
       } else {
         return dispatch(errorMsg(res.data.msg))
       }

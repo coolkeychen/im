@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
+import { connect } from "react-redux";
+import { loadData } from "../../store/user";
 
 /**
  * 获取用户信息
@@ -11,6 +13,10 @@ import { withRouter } from 'react-router-dom';
  */
 
  @withRouter
+ @connect(
+  null,
+  {loadData}
+ )
 class Authroute extends Component {
   componentDidMount() {
     const publicList = ['/login','/register'];
@@ -23,7 +29,7 @@ class Authroute extends Component {
       console.log('res',res)
       if (res.status ===200) {
         if (res.data.code === 0) {
-
+          this.props.loadData(res.data.data)
         } else {
           this.props.history.push('/login')
         }

@@ -2,7 +2,8 @@ const express = require('express')
 const utils = require('utility')
 
 const Router = express.Router();
-const model = require('./model')
+const model = require('./model');
+const { json } = require('body-parser');
 const User = model.getModel('user')
 const _filter = {'pwd':0,'__v':0}
 
@@ -11,6 +12,22 @@ Router.get('/list',function (req, res) {
   // User.remove({},function (e,d){})
   User.find({},function (err,doc) {
     res.json(doc)
+  })
+})
+
+Router.post('/update',function (req, res) {
+  console.log('update',req);
+  const userid = req.cookies.userid;
+  if (!userid) {
+    return json.dump({code: 1})
+  }
+  const body = req.body
+  User.findByIdAndUpdate(userid,body,function (err,doc) {
+    const data = Object.assign({},{
+      user: doc.user,
+      type: doc.type
+    },body)
+    return res.json({code:0, data})
   })
 })
 

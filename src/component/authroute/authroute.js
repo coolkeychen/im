@@ -39,7 +39,6 @@ class Authroute extends Component {
   render() {
     return (
       <div>
-        <p>你好呀！！</p>
       </div>
     );
   }

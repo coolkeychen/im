@@ -3,6 +3,7 @@ import {getRedirectPath} from '../tools/util';
 
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+const AUTH_SUCCESS = 'AUTH_SUCCESS';
 const ERROR_MSG = 'ERROR_MSG';
 const LOAD_DATA = 'LOAD_DATA';
 
@@ -24,11 +25,18 @@ export function user (state = initState ,action) {
       return {...state,  isAuth: false, msg:action.payload }
     case LOGIN_SUCCESS:
       return {...state,redirectTo:getRedirectPath(action.payload), isAuth: true, ...action.payload}
+    case AUTH_SUCCESS:
+      return {...state,redirectTo:getRedirectPath(action.payload),...action.payload}
     case LOAD_DATA:
       return {...state, ...action.payload };
     default:
       return state;
   }
+}
+
+
+function authSuccess(data) {
+  return { type:AUTH_SUCCESS, payload: data }
 }
 
 function errorMsg(msg) {
@@ -49,6 +57,19 @@ function loginSuccess(data) {
 export function loadData(userinfo){
 	console.log(loadData)
 	return { type:LOAD_DATA, payload:userinfo}
+}
+
+export function update(data) {
+  return dispatch=> {
+    axios.post('/user/update',data)
+      .then(res => {
+        if (res.status === 200 && res.data.code === 0) {
+          return dispatch(authSuccess(res.data.data)) 
+        } else {
+          return dispatch(errorMsg(res.data.msg))
+        }
+      })
+  }
 }
 
 export function register(user, pwd ,repeatpwd, type) {

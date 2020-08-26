@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { NavBar,InputItem,TextareaItem,Button } from "antd-mobile";
 import AvatarSelector from "../../component/avatar-selector/avatar-selector";
 import { update } from "../../store/user";
+import { Redirect } from "react-router-dom";
 
 
 @connect(
@@ -36,6 +37,7 @@ class Bossinfo extends Component {
   render() {
     return (
       <div>
+        {this.props.redirectTo? <Redirect to={this.props.redirectTo} ></Redirect> :null}
         <NavBar mode="dark">Boss完善信息页面</NavBar>
         <AvatarSelector
           selectAvatar = { (avatarName) => {

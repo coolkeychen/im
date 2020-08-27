@@ -13,6 +13,7 @@ import reducers from './store/reducer'
 import Login from "./container/login/login";
 import Resgister from "./container/register/register";
 import Bossinfo from "./container/bossinfo/bossinfo";
+import Geniusinfo from "./container/geniusinfo/geniusinfo";
 import AuthRoute from "./component/authroute/authroute";
 import './tools/http'
 
@@ -48,6 +49,7 @@ ReactDOM.render(
       {/* <Switch> */}
         <AuthRoute></AuthRoute>
         <Route path="/bossinfo" component={Bossinfo}></Route>
+        <Route path="/geniusinfo" component={Geniusinfo}></Route>
         <Route path="/login" component={Login}></Route>
         <Route path="/register" component={Resgister}></Route>
         {/* <Redirect to="/dashboard"></Redirect> */}

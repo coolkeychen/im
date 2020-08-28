@@ -17,21 +17,14 @@ class Boss extends Component {
     }
   }
   componentDidMount() {
-    axios.get("/user/list?type=genius",)
-      .then(res => {
-        if (res.data.code ===0) {
-          this.setState({
-            data: res.data.data
-          })
-        }
-      })
+    this.props.getUserList('genius')
   }
   render() {
     const Header = Card.Header;
     const Body = Card.Body;
     return (
       <WingBlank>
-        { this.state.data.map(item => (
+        { this.props.userlist.map(item => (
           item.avatar?
           <Card 
             key = { item._id }

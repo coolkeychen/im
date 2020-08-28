@@ -8,13 +8,14 @@ import { BrowserRouter, Route, Link ,Redirect,Switch } from 'react-router-dom'
 import {Provider} from 'react-redux'
 // import { counter } from './store/index'
 import Auth from "./Auth";
-import Dashboard from "./Dashboard";
+// import Dashboard from "./Dashboard";
 import reducers from './store/reducer'
 import Login from "./container/login/login";
 import Resgister from "./container/register/register";
 import Bossinfo from "./container/bossinfo/bossinfo";
 import Geniusinfo from "./container/geniusinfo/geniusinfo";
 import AuthRoute from "./component/authroute/authroute";
+import Dashboard from "./component/dashboard/dashboard";
 import './tools/http'
 
 
@@ -40,20 +41,20 @@ const store = createStore(reducers, compose(
 //   }
 // }
 
+
 ReactDOM.render(
   (<Provider store = {store}>
     <BrowserRouter>
       <div>
-
-      
-      {/* <Switch> */}
-        <AuthRoute></AuthRoute>
-        <Route path="/bossinfo" component={Bossinfo}></Route>
-        <Route path="/geniusinfo" component={Geniusinfo}></Route>
-        <Route path="/login" component={Login}></Route>
-        <Route path="/register" component={Resgister}></Route>
-        {/* <Redirect to="/dashboard"></Redirect> */}
-      {/* </Switch> */}
+          <AuthRoute></AuthRoute>
+        <Switch>
+          <Route path="/bossinfo" component={Bossinfo}></Route>
+          <Route path="/geniusinfo" component={Geniusinfo}></Route>
+          <Route path="/login" component={Login}></Route>
+          <Route path="/register" component={Resgister}></Route>
+          <Route component={Dashboard}></Route>
+          {/* <Redirect to="/dashboard"></Redirect> */}
+        </Switch>
       </div>
       
     </BrowserRouter>

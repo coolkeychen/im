@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.am-tab-bar {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}

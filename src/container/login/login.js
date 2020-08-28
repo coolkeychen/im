@@ -38,9 +38,10 @@ class Login extends React.Component {
     this.props.history.push('/register')
   }
   render() {
+    console.log('login',this.props.redirectTo);
     return (
       <div>
-        {this.props.redirectTo? <Redirect to={this.props.redirectTo} />:null}
+        {(this.props.redirectTo&&this.props.redirectTo!='/login')? <Redirect to={this.props.redirectTo} />:null}
         <Logo></Logo>
         <WingBlank>
           {this.props.msg ? <p className="warn-tip">{this.props.msg}</p>: null}

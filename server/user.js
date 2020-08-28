@@ -9,14 +9,14 @@ const _filter = {'pwd':0,'__v':0}
 
 Router.get('/list',function (req, res) {
   // 清除所有用户数据
+  const type = req.query.type
   // User.remove({},function (e,d){})
-  User.find({},function (err,doc) {
-    res.json(doc)
+  User.find({type},function (err,doc) {
+    res.json({code: 0, data:doc})
   })
 })
 
 Router.post('/update',function (req, res) {
-  console.log('update',req);
   const userid = req.cookies.userid;
   if (!userid) {
     return json.dump({code: 1})

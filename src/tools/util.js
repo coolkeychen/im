@@ -1,6 +1,6 @@
 export function getRedirectPath({type, avatar}) {
-  console.log('type',type);
-  console.log('avatar',avatar)
+  console.log('util-type',type);
+  console.log('util-avatar',avatar)
   // 根据用户信息，返回跳转地址
   // user.type /boss /genius
   // user.avatar /bossinfo /geniusinfo

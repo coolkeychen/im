@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { user } from '../../store/user';
+import { Route, Switch } from "react-router-dom";
 import { NavBar } from "antd-mobile";
 import NavLinkBar from "../navlink/navlink";
+import Boss from "../boss/boss";
 
-function Boss() {
-  return <h2>Boss</h2>
-}
 
 function Genius() {
-  return <h2>Genius</h2>
+  return <h2>GeniusAAA</h2>
 }
 
 function Msg() {
@@ -28,43 +26,51 @@ class Dashboard extends Component {
   render() {
     const { pathname } = this.props.location
     const user = this.props.user;
+    console.log(user.type);
     const navList = [
       {
-        path: '/boss',
-        text: '牛人',
-        icon: 'boss',
-        title: '牛人列表',
-        component: Boss,
-        hide: user.type === 'genius'
-      },
-      {
-        path: '/genius',
-        text: 'boss',
-        icon: 'job',
-        title: 'Boss列表',
-        component: Genius,
-        hide: user.type === 'boss'
-      },
-      {
-        path: '/msg',
-        text: '消息',
-        icon: 'msg',
-        title: '消息列表',
-        component: Msg
-      },
-      {
-        path: '/me',
-        text: '消息',
-        icon: 'user',
-        title: '个人中心',
-        component: User
-      }
+				path:'/boss',
+				text:'牛人',
+				icon:'boss',
+				title:'牛人列表',
+				component:Boss,
+				hide:user.type=='genius'
+			},
+			{
+				path:'/genius',
+				text:'boss',
+				icon:'job',
+				title:'BOSS列表',
+				component:Genius,
+				hide:user.type=='boss'
+			},
+			{
+				path:'/msg',
+				text:'消息',
+				icon:'msg',
+				title:'消息列表',
+				component:Msg
+			},
+			{
+				path:'/user',
+				text:'我',
+				icon:'user',
+				title:'个人中心',
+				component:User
+			}
     ]
     return (
       <div>
         <NavBar
           mode="dark"
           >{navList.find(v=> v.path === pathname)['title']}</NavBar>
+        <div style={{marginTop: 25}}>
+          <Switch>
+            { navList.map(item => (
+              <Route key={item.path} path={item.path} component={item.component}/>
+            ))}
+          </Switch>
+        </div>
         <NavLinkBar data={navList}></NavLinkBar>
       </div>
     );

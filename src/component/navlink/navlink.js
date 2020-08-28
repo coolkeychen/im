@@ -14,8 +14,8 @@ class NavLinkBar extends Component {
       item => !item.hide
     )
     const {pathname}  = this.props.location
-    console.log('data',this.props.data)
-    console.log('navList',navList)
+    // console.log('data',this.props.data)
+    // console.log('navList',navList)
     return (
       <TabBar>
         {navList.map(item => (

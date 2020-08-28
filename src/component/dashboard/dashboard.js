@@ -4,11 +4,8 @@ import { Route, Switch } from "react-router-dom";
 import { NavBar } from "antd-mobile";
 import NavLinkBar from "../navlink/navlink";
 import Boss from "../boss/boss";
+import Genius from "../genius/genius";
 
-
-function Genius() {
-  return <h2>GeniusAAA</h2>
-}
 
 function Msg() {
   return <h2>Msg</h2>
@@ -26,7 +23,6 @@ class Dashboard extends Component {
   render() {
     const { pathname } = this.props.location
     const user = this.props.user;
-    console.log(user.type);
     const navList = [
       {
 				path:'/boss',

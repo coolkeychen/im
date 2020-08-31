@@ -58,7 +58,7 @@ class Dashboard extends Component {
       <div>
         <NavBar
           mode="dark"
-          >{navList.find(v=> v.path === pathname).title}</NavBar>
+          >{navList.find(v=> v.path === pathname)['title']}</NavBar>
         <div style={{marginTop: 15}}>
           <Switch>
             { navList.map(item => (

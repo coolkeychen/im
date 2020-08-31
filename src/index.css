@@ -15,6 +15,7 @@ code {
 
 .am-tab-bar {
   width: 100%;
+  height: initial !important;
   position: fixed;
   left: 0;
   bottom: 0;

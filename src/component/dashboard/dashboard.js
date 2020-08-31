@@ -5,15 +5,14 @@ import { NavBar } from "antd-mobile";
 import NavLinkBar from "../navlink/navlink";
 import Boss from "../boss/boss";
 import Genius from "../genius/genius";
+import Userinfo from "../userinfo/userinfo";
 
 
 function Msg() {
   return <h2>Msg</h2>
 }
 
-function User() {
-  return <h2>Me</h2>
-}
+
 
 @connect(
   state => state,
@@ -52,15 +51,15 @@ class Dashboard extends Component {
 				text:'我',
 				icon:'user',
 				title:'个人中心',
-				component:User
+				component:Userinfo
 			}
     ]
     return (
       <div>
         <NavBar
           mode="dark"
-          >{navList.find(v=> v.path === pathname)['title']}</NavBar>
-        <div style={{marginTop: 25}}>
+          >{navList.find(v=> v.path === pathname).title}</NavBar>
+        <div style={{marginTop: 15}}>
           <Switch>
             { navList.map(item => (
               <Route key={item.path} path={item.path} component={item.component}/>

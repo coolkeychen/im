@@ -53,12 +53,13 @@ class Dashboard extends Component {
 				title:'个人中心',
 				component:Userinfo
 			}
-    ]
+		]
+		const currentPage = navList.find(v=> v.path === pathname);
     return (
       <div>
         <NavBar
           mode="dark"
-          >{navList.find(v=> v.path === pathname)['title']}</NavBar>
+          >{currentPage && currentPage['title']}</NavBar>
         <div style={{marginTop: 15}}>
           <Switch>
             { navList.map(item => (

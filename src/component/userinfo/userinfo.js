@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { Result, List ,WhiteSpace,Modal } from "antd-mobile";
 import { connect } from 'react-redux';
 import browserCookies from "browser-cookies";
+import { logoutSubmit } from "../../store/user";
+import { Redirect } from "react-router-dom";
 
 @connect(
-  state => state.user
+  state => state.user,
+  { logoutSubmit }
 )
 class Userinfo extends Component {
   constructor(props) {
@@ -18,7 +21,8 @@ class Userinfo extends Component {
         { text: 'Cancel', onPress: () => console.log('cancel') },
         { text: 'Ok', onPress: () => {
           browserCookies.erase('userid');
-          window.location.href = window.location.href;
+          // window.location.href = window.location.href;
+          this.props.logoutSubmit();
           } },
       ])
   }
@@ -34,7 +38,7 @@ class Userinfo extends Component {
           // img={myImg(require(`../img/${this.props.avatar}.png`))}
           img={<img src={require(`../img/${this.props.avatar}.png`)} style={{width:50}} alt="" />}
           title={this.props.user}
-          message={this.props.type === 'boss' ? this.props.company : this.props.desc }
+          message={this.props.type === 'boss' ? this.props.company : null }
         />
         <List renderHeader={() => '简介'}>
           <Item multipleLine>
@@ -52,7 +56,7 @@ class Userinfo extends Component {
             退出登录
           </Item>
         </List>
-      </div>: null
+      </div>: <Redirect to={this.props.redirectTo}></Redirect>
     );
   }
 }

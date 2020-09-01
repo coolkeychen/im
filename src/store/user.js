@@ -6,6 +6,7 @@ const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const AUTH_SUCCESS = 'AUTH_SUCCESS';
 const ERROR_MSG = 'ERROR_MSG';
 const LOAD_DATA = 'LOAD_DATA';
+const LOADOUT = 'LOADOUT';
 
 const initState = {
   redirectTo:'',
@@ -29,6 +30,8 @@ export function user (state = initState ,action) {
       return {...state,redirectTo:getRedirectPath(action.payload),...action.payload}
     case LOAD_DATA:
       return {...state, ...action.payload };
+    case LOADOUT:
+      return {...initState, redirectTo:'/login' };
     default:
       return state;
   }
@@ -108,4 +111,8 @@ export function login(user, pwd) {
       }
     })
   }
+}
+
+export function logoutSubmit() {
+  return { type: LOADOUT}
 }

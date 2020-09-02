@@ -3,9 +3,12 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const userRouter = require('./user')
 
-
 // 新建app
 const app = express()
+
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
+
 // 方便解析客户端传来的数据参数
 app.use(bodyParser.json())
 // 解析
@@ -52,6 +55,11 @@ app.get('/',function(req,res) {
   })
 })
  */
-app.listen(9093,function() {
+
+io.on('connection',function (socket) {
+  console.log('user login')
+  })
+
+server.listen(9093,function() {
   console.log('Node app start at port 9093')
 })

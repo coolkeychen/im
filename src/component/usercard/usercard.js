@@ -2,13 +2,25 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from "prop-types";
 import { Card, WingBlank } from "antd-mobile";
+import { withRouter } from "react-router-dom";
 
 
-
+@withRouter
 class Usercard extends Component {
   static propTypes = {
     data: PropTypes.array.isRequired
   }
+
+  constructor(props) {
+    super(props);
+    this.handleChat = this.handleChat.bind(this)
+  }
+
+  handleChat(v) {
+    console.log('chat',v);
+    this.props.history.push(`/chat/${v}`)
+  }
+
   render() {
     const Header = Card.Header;
     const Body = Card.Body;
@@ -18,6 +30,7 @@ class Usercard extends Component {
           item.avatar?
           <Card 
             key = { item._id }
+            onClick={() => this.handleChat(item.user) }
             style={{marginBottom: 15}}>
             <Header
               title = {item.user}

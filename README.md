@@ -203,3 +203,20 @@ yarn add mongoose -S
       ```
       yarn add browser-cookies --save
       ```
+21. socket.io
+   * 基于事件的实时双向通信库
+      * 基于 websocket 协议
+      * 前后端通过事件进行双向通信
+      * 配合 express，快速开发实时应用
+22. socket 和 Ajax 的区别
+   * Ajax 基于 http 协议，单向，实时获取数据只能轮询
+   * socket.io 基于 websocket 双向通信协议，后端可以主动推送数据
+   * 现代浏览器都支持 websocket 双向通信协议，没什么兼容性问题
+   * 安装服务端
+   ```
+    yarn add socket.io --save
+   ```
+   * 安装客户端
+   ```
+    yarn add socket.io-client --save
+   ```

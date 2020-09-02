@@ -7,19 +7,43 @@ import { Redirect } from "react-router-dom";
 import './login.css';
 
 
-function hello() {
-  console.log('Hello cat, I love cat');
+// function hello() {
+//   console.log('Hello cat, I love cat');
+// }
+
+// function hi(fn) {
+//   return function () {
+//     console.log('Say hello before')
+//     fn();
+//     console.log('Say hello after')
+//   }
+// }
+// hello = hi(hello)
+// hello();
+
+// 属性代理 
+function wrapperHello(Comp) {
+  class Hi extends React.Component {
+    render() {
+      return (
+        <div>
+          <p>这个是HOC高阶组件</p>
+          <Comp {...this.props}></Comp>
+        </div>
+      )
+    }
+  }
+  return Hi
 }
 
-function hi(fn) {
-  return function () {
-    console.log('Say hello before')
-    fn();
-    console.log('Say hello after')
+@wrapperHello
+class Hello extends React.Component {
+  render() {
+    return <h2>Hello cat, I love React</h2>
   }
 }
-hello = hi(hello)
-hello();
+
+// Hello = wrapperHello(Hello)
 
 @connect(
   state=>state.user,
@@ -56,6 +80,7 @@ class Login extends React.Component {
     // console.log('login',this.props.redirectTo);
     return (
       <div>
+        <Hello></Hello>
         {(this.props.redirectTo&&this.props.redirectTo!='/login')? <Redirect to={this.props.redirectTo} />:null}
         <Logo></Logo>
         <WingBlank>

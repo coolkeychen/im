@@ -6,6 +6,21 @@ import { login } from '../../store/user';
 import { Redirect } from "react-router-dom";
 import './login.css';
 
+
+function hello() {
+  console.log('Hello cat, I love cat');
+}
+
+function hi(fn) {
+  return function () {
+    console.log('Say hello before')
+    fn();
+    console.log('Say hello after')
+  }
+}
+hello = hi(hello)
+hello();
+
 @connect(
   state=>state.user,
   {login}
@@ -38,7 +53,7 @@ class Login extends React.Component {
     this.props.history.push('/register')
   }
   render() {
-    console.log('login',this.props.redirectTo);
+    // console.log('login',this.props.redirectTo);
     return (
       <div>
         {(this.props.redirectTo&&this.props.redirectTo!='/login')? <Redirect to={this.props.redirectTo} />:null}

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { login } from '../../store/user';
 import { Redirect } from "react-router-dom";
 import './login.css';
+import imForm from "../../component/im-form/im-form";
 
 
 // function hello() {
@@ -38,7 +39,7 @@ import './login.css';
 
 
 // 继承传递（HOC高阶组件）
-function wrapperHello(Comp) {
+/* function wrapperHello(Comp) {
   class Hi extends Comp {
     componentDidMount() {
       console.log('高阶组件新增的生命周期，加载完成！')
@@ -58,7 +59,7 @@ class Hello extends React.Component {
   render() {
     return <h2>Hello cat, I love React</h2>
   }
-}
+} */
 
 // Hello = wrapperHello(Hello)
 
@@ -66,6 +67,7 @@ class Hello extends React.Component {
   state=>state.user,
   {login}
 )
+@imForm
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -74,19 +76,19 @@ class Login extends React.Component {
       pwd: '',
     }
     this.register = this.register.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
   }
 
-  handleChange(key,val) {
-    this.setState({
-      [key]:val
-    })
-  }
+  // handleChange(key,val) {
+  //   this.setState({
+  //     [key]:val
+  //   })
+  // }
 
   handleLogin() {
     // console.log(this.state);
-    const {user,pwd} = this.state;
+    const {user,pwd} = this.props.state;
     this.props.login(user,pwd)
   }
 
@@ -97,18 +99,18 @@ class Login extends React.Component {
     // console.log('login',this.props.redirectTo);
     return (
       <div>
-        <Hello></Hello>
+        {/* <Hello></Hello> */}
         {(this.props.redirectTo&&this.props.redirectTo!='/login')? <Redirect to={this.props.redirectTo} />:null}
         <Logo></Logo>
         <WingBlank>
           {this.props.msg ? <p className="warn-tip">{this.props.msg}</p>: null}
           <List>
             <InputItem 
-              onChange={v=>this.handleChange('user',v)}>用户:</InputItem>
+              onChange={v=>this.props.handleChange('user',v)}>用户:</InputItem>
             <WhiteSpace />
             <InputItem 
               type="password"
-              onChange={v=>this.handleChange('pwd',v)}
+              onChange={v=>this.props.handleChange('pwd',v)}
               >密码:</InputItem>
           </List>
         </WingBlank>

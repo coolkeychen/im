@@ -5,6 +5,7 @@ import { register } from '../../store/user'
 import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
 import './register.css';
+import imForm from "../../component/im-form/im-form";
 
 
 function offline(params) {
@@ -16,21 +17,25 @@ function offline(params) {
   { register }
 )
 
-
+@imForm
 class Register extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      user: '',
-      pwd: '',
-      repeatPwd: '',
-      type: 'genius'
+      // user: '',
+      // pwd: '',
+      // repeatPwd: '',
+      // type: 'genius'
     }
     this.login = this.login.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  componentDidMount(){
+		this.props.handleChange('type','genius')
+	}
 
   login() {
     this.props.history.push('/login')
@@ -43,25 +48,24 @@ class Register extends React.Component{
     })
   }
 
-  handleChange(key,val) {
-    this.setState({
-      [key]: val
-    })
-  }
+  // handleChange(key,val) {
+  //   this.setState({
+  //     [key]: val
+  //   })
+  // }
 
   handleSubmit() {
     console.log(this.state);
-    const {user,pwd, repeatPwd,type} = this.state;
+    const {user,pwd, repeatPwd,type} = this.props.state;
     this.props.register(user,pwd, repeatPwd,type);
   }
 
   render() {
     const RadioItem = Radio.RadioItem;
-    const { type } = this.state;
+    const { type } = this.props.state;
     const toastInfo = (params) => {
       return Toast.offline('Network connection failed !!!', 1);
     }
-    console.log(this.props.msg)
     return  (
       <div>
         <Logo></Logo>
@@ -69,15 +73,15 @@ class Register extends React.Component{
           {this.props.msg ? <p className="warn-tip">{this.props.msg}</p>: null}
           {this.props.redirectTo? <Redirect to={this.props.redirectTo} /> : null}
           <List>
-            <InputItem onChange={v=>this.handleChange('user',v)}>用户:</InputItem>
+            <InputItem onChange={v=>this.props.handleChange('user',v)}>用户:</InputItem>
             <InputItem 
               type="password"
-              onChange={v=>this.handleChange('pwd',v)}>密码:</InputItem>
+              onChange={v=>this.props.handleChange('pwd',v)}>密码:</InputItem>
             <InputItem 
               type="password"
-              onChange={v=>this.handleChange('repeatPwd',v)}>确认密码:</InputItem>
-            <RadioItem checked={type==='genius'} onChange={() => this.handleChange('type','genius')}>牛人</RadioItem>
-            <RadioItem checked={type==='boss'} onChange={() => this.handleChange('type','boss')}>Boss</RadioItem>
+              onChange={v=>this.props.handleChange('repeatPwd',v)}>确认密码:</InputItem>
+            <RadioItem checked={type==='genius'} onChange={() => this.props.handleChange('type','genius')}>牛人</RadioItem>
+            <RadioItem checked={type==='boss'} onChange={() => this.props.handleChange('type','boss')}>Boss</RadioItem>
           </List>
           <WhiteSpace />
           <Button 

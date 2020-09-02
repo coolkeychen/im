@@ -21,15 +21,32 @@ import './login.css';
 // hello = hi(hello)
 // hello();
 
-// 属性代理 
+// 属性代理 （HOC高阶组件）
+// function wrapperHello(Comp) {
+//   class Hi extends React.Component {
+//     render() {
+//       return (
+//         <div>
+//           <p>这个是HOC高阶组件</p>
+//           <Comp {...this.props}></Comp>
+//         </div>
+//       )
+//     }
+//   }
+//   return Hi
+// }
+
+
+// 继承传递（HOC高阶组件）
 function wrapperHello(Comp) {
-  class Hi extends React.Component {
+  class Hi extends Comp {
+    componentDidMount() {
+      console.log('高阶组件新增的生命周期，加载完成！')
+    }
+
     render() {
       return (
-        <div>
-          <p>这个是HOC高阶组件</p>
-          <Comp {...this.props}></Comp>
-        </div>
+        <Comp></Comp>
       )
     }
   }

@@ -58,7 +58,10 @@ app.get('/',function(req,res) {
 
 io.on('connection',function (socket) {
   console.log('user login')
+  socket.on('sendmsg',function(data) {
+    console.log(data);
   })
+})
 
 server.listen(9093,function() {
   console.log('Node app start at port 9093')

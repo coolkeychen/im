@@ -59,6 +59,7 @@ app.get('/',function(req,res) {
 io.on('connection',function (socket) {
   console.log('user login')
   socket.on('sendmsg',function(data) {
+    io.emit('recvmsg',data)
     console.log(data);
   })
 })

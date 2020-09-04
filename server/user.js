@@ -5,6 +5,7 @@ const Router = express.Router();
 const model = require('./model');
 const { json } = require('body-parser');
 const User = model.getModel('user')
+const Chat = model.getModel('chat')
 const _filter = {'pwd':0,'__v':0}
 
 Router.get('/list',function (req, res) {
@@ -13,6 +14,15 @@ Router.get('/list',function (req, res) {
   // User.remove({},function (e,d){})
   User.find({type},function (err,doc) {
     res.json({code: 0, data:doc})
+  })
+})
+
+Router.get('/getmsglist',function (req, res) {
+  const user = req.body.user
+  Chat.find({}, function (err,doc) {
+    if (doc) {
+      return res.json({ code: 0, data: doc})
+    }
   })
 })
 

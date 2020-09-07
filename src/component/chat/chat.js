@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { List, InputItem } from "antd-mobile";
 import { connect } from "react-redux";
-import { getMsgList } from "../../store/chat";
+import { getMsgList ,sendMsg ,recvMsg } from "../../store/chat";
 import io from 'socket.io-client';
 
 const socket = io('ws://localhost:9093')
 
 @connect(
-  state => state.chat,
-  { getMsgList }
+  state => state,
+  { getMsgList,sendMsg,recvMsg }
 )
 class Chat extends Component {
   constructor(props) {
@@ -22,11 +22,18 @@ class Chat extends Component {
 
   handleSubmit() {
     // socket.emit('sendmsg',{text:this.state.text})
+    const props = this.props;
+    console.log(props.user._id);
+    const from = props.user._id;
+    const to = props.match.params.user;
+    const msg = this.state.text;
+    props.sendMsg({from,to, msg});
     this.setState({text: ''})
-    console.log(this.state);
   }
 
   componentDidMount() {
+    console.log(this.props);
+    this.props.recvMsg();
     this.props.getMsgList();
     // socket.on('recvmsg',(data)=>{
     //   this.setState({

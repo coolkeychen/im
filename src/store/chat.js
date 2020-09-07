@@ -6,7 +6,7 @@ const socket = io('ws://localhost:9093')
 
 const MSG_LIST = 'MSG_LIST'
 const MSG_READ = 'MSG_READ'
-const MSG_REVC = 'MSG_REVC'
+const MSG_RECV = 'MSG_RECV'
 
 const initState = {
   msgList: [],
@@ -15,15 +15,36 @@ const initState = {
 
 export function chat(state = initState, action) {
   switch (action.type) {
-    case 'MSG_LIST':
+    case MSG_LIST:
       return { ...state,msgList: action.payload, unread: action.payload.filter(v => !v.read).length }
+    case MSG_RECV:
+      return { ...state, msgList: [...state.msgList, action.payload]}
     default:
       return state
   }
 }
 
 function msgList(msgs) {
-  return {type:'MSG_LIST',payload:msgs}
+  return { type:MSG_LIST ,payload:msgs }
+}
+
+function msgRecv(msg) {
+  return { type:MSG_RECV ,payload: msg}
+}
+
+export function recvMsg() {
+  return dispatch => {
+    socket.on('recvmsg',function (data) {
+      console.log('recvmsg', data);
+      dispatch(msgRecv(data));
+    })
+  }
+}
+
+export function sendMsg({from,to,msg}) {
+  return dispatch => {
+    socket.emit('sendmsg',{from,to,msg})
+  }
 }
 
 export function getMsgList() {

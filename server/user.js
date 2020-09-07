@@ -1,11 +1,10 @@
 const express = require('express')
 const utils = require('utility')
-
 const Router = express.Router();
 const model = require('./model');
-const { json } = require('body-parser');
 const User = model.getModel('user')
 const Chat = model.getModel('chat')
+const { json } = require('body-parser');
 const _filter = {'pwd':0,'__v':0}
 
 Router.get('/list',function (req, res) {

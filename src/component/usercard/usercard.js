@@ -30,7 +30,7 @@ class Usercard extends Component {
           item.avatar?
           <Card 
             key = { item._id }
-            onClick={() => this.handleChat(item.user) }
+            onClick={() => this.handleChat(item._id) }
             style={{marginBottom: 15}}>
             <Header
               title = {item.user}

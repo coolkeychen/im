@@ -18,7 +18,7 @@ export function chat(state = initState, action) {
     case MSG_LIST:
       return { ...state,msgList: action.payload, unread: action.payload.filter(v => !v.read).length }
     case MSG_RECV:
-      return { ...state, msgList: [...state.msgList, action.payload]}
+      return { ...state, msgList: [...state.msgList, action.payload],unread:state.unread+1}
     default:
       return state
   }

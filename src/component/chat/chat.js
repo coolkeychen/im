@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List, InputItem } from "antd-mobile";
+import { List, InputItem,NavBar } from "antd-mobile";
 import { connect } from "react-redux";
 import { getMsgList ,sendMsg ,recvMsg } from "../../store/chat";
 import io from 'socket.io-client';
@@ -45,13 +45,30 @@ class Chat extends Component {
 
 
   render() {
-    const msgList = this.state.msg
+    const msgList = this.props.chat.msgList
+    const user =  this.props.match.params.user;
+    const Item = List.Item;
+    console.log(msgList)
     return (
-      <div>
+      <div id="chat-page">
+        <NavBar
+          mode="dark"
+        >{user}</NavBar>
         {
           msgList.length> 0 
           ? msgList.map((v)=>{
-            return <p key={v}>{v}</p>
+            return user == v.from ? (
+              <List key={v._id}>
+                <Item
+                >{v.content}</Item>
+              </List>
+            ) : (
+              <List key={v._id} >
+                <Item 
+                  className="chat-me"
+                  >{v.content}</Item>
+              </List>
+            )
           })
           : null
         }

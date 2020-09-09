@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { List, InputItem,NavBar } from "antd-mobile";
+import { List, InputItem,NavBar, Icon } from "antd-mobile";
 import { connect } from "react-redux";
 import { getMsgList ,sendMsg ,recvMsg } from "../../store/chat";
+import { getChatId } from "../../tools/util";
 import io from 'socket.io-client';
 
 const socket = io('ws://localhost:9093')
@@ -33,8 +34,11 @@ class Chat extends Component {
 
   componentDidMount() {
     console.log(this.props);
-    this.props.recvMsg();
-    this.props.getMsgList();
+    if (this.props.chat.msgList.length === 0) {
+      this.props.recvMsg();
+      this.props.getMsgList();
+    } 
+    
     // socket.on('recvmsg',(data)=>{
     //   this.setState({
     //     msg: [...this.state.msg,data.text]
@@ -45,26 +49,37 @@ class Chat extends Component {
 
 
   render() {
-    const msgList = this.props.chat.msgList
-    const user =  this.props.match.params.user;
+    const userid =  this.props.match.params.user;
+    const users = this.props.chat.users;
+    const chatId = getChatId(userid,this.props.user._id)
+    const msgList = this.props.chat.msgList.filter(v=>v.chatid === chatId)
+    if (!users[userid]) {
+      return null
+    }
     const Item = List.Item;
-    console.log(msgList)
     return (
       <div id="chat-page">
         <NavBar
           mode="dark"
-        >{user}</NavBar>
+          icon={<Icon type="left" />}
+          onLeftClick={() => {
+            this.props.history.goBack();
+          }}
+        >{users[userid].name}</NavBar>
         {
           msgList.length> 0 
           ? msgList.map((v)=>{
-            return user == v.from ? (
+            const avatar = require(`../img/${users[v.from].avatar}.png`)
+            return userid == v.from ? (
               <List key={v._id}>
                 <Item
+                  thumb={avatar}
                 >{v.content}</Item>
               </List>
             ) : (
               <List key={v._id} >
                 <Item 
+                  extra={<img src={avatar}/>}
                   className="chat-me"
                   >{v.content}</Item>
               </List>

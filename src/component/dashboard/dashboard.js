@@ -6,7 +6,7 @@ import NavLinkBar from "../navlink/navlink";
 import Boss from "../boss/boss";
 import Genius from "../genius/genius";
 import Userinfo from "../userinfo/userinfo";
-
+import { getMsgList ,sendMsg ,recvMsg } from "../../store/chat";
 
 function Msg() {
   return <h2>Msg</h2>
@@ -15,10 +15,17 @@ function Msg() {
 
 
 @connect(
-  state => state,
+	state => state,
+	{getMsgList,recvMsg}
 )
 
 class Dashboard extends Component {
+	componentDidMount() {
+		// if (this.props.chat.msgList.length === 0) {
+		// 	this.props.getMsgList();
+		// 	this.props.recvMsg();
+		// }
+	}
   render() {
     const { pathname } = this.props.location
     const user = this.props.user;

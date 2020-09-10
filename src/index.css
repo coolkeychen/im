@@ -44,3 +44,11 @@ code {
   bottom: 0;
   width: 100%;
 }
+
+.msg-list .am-list-body {
+  background-color: initial;
+}
+
+.msg-list .am-list-item {
+  margin-bottom: 10px;
+}

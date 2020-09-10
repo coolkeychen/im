@@ -6,11 +6,9 @@ import NavLinkBar from "../navlink/navlink";
 import Boss from "../boss/boss";
 import Genius from "../genius/genius";
 import Userinfo from "../userinfo/userinfo";
+import Msg from '../msg/msg';
 import { getMsgList ,sendMsg ,recvMsg } from "../../store/chat";
 
-function Msg() {
-  return <h2>Msg</h2>
-}
 
 
 
@@ -21,10 +19,10 @@ function Msg() {
 
 class Dashboard extends Component {
 	componentDidMount() {
-		// if (this.props.chat.msgList.length === 0) {
-		// 	this.props.getMsgList();
-		// 	this.props.recvMsg();
-		// }
+		if (this.props.chat.msgList.length === 0) {
+			this.props.getMsgList();
+			this.props.recvMsg();
+		}
 	}
   render() {
     const { pathname } = this.props.location

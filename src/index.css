@@ -38,9 +38,13 @@ code {
   margin-top: 0;
 }
 
+.chat-connent {
+  margin-bottom: 40px;
+}
+
 .stick-footer {
   z-index: 10;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
 }

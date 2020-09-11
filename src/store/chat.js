@@ -19,8 +19,10 @@ export function chat(state = initState, action) {
     case MSG_LIST:
       return { ...state,msgList: action.payload.msgs, unread: action.payload.msgs.filter(v => !v.read && v.to ==action.payload.userid).length ,users: action.payload.users}
     case MSG_RECV:
-      const n = action.payload.msg.to = action.payload.userid ? 1 : 0;
+      const n = action.payload.msg.to == action.payload.userid ? 1 : 0;
       return { ...state, msgList: [...state.msgList, action.payload.msg],unread:state.unread + n }
+    case MSG_READ:
+      return { ...state, msgList: state.msgList.map(v=> ({ ...v, read:true})),unread: state.unread - action.payload.num}
     default:
       return state
   }
@@ -34,11 +36,26 @@ function msgRecv(msg,userid) {
   return { type:MSG_RECV ,payload: {msg, userid}}
 }
 
+function msgRead(from, to, num ) {
+  return { type: MSG_READ, payload: {from, to, num}}
+}
+
+export function readMsg(from) {
+  return (dispatch, getState) => {
+    const userid = getState().user._id
+    axios.post('/user/readMsg',{from})
+    .then(res => {
+      if ( res.data.code ===0 ) {
+        dispatch(msgRead({userid,from,num: res.data.num}))
+      }
+    })
+  }
+}
+
 export function recvMsg() {
   return (dispatch,getState) => {
-    socket.on('recvmsg',function (data) {
-      // console.log('recvmsg', data);
-      dispatch(msgRecv(data,getState().user._id,));
+    socket.on('recvmsg',function(data) {
+      dispatch(msgRecv(data,getState().user._id));
     })
   }
 }
@@ -54,7 +71,7 @@ export function getMsgList() {
     axios.get('/user/getmsglist')
     .then(res => {
       if ( res.data.code ===0 ) {
-        console.log('getState',getState());
+        // console.log('getState',getState());
         dispatch(msgList(res.data.data,res.data.users,getState().user._id))
       }
     })

@@ -62,9 +62,11 @@ app.get('/',function(req,res) {
 io.on('connection',function (socket) {
   socket.on('sendmsg',function(data) {
     const { from,to, msg} = data;
+    // console.log('sendmsg',data);
     const chatid = [from,to].sort().join('_')
     Chat.create({chatid, from ,to ,content:msg},function (err,doc) {
-      io.emit('recvmsg',Object.assign({},doc._doc))
+      console.log('_doc',doc._doc)
+      io.emit('recvmsg',Object.assign({to},doc._doc))
     })
   })
 })

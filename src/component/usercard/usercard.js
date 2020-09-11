@@ -17,7 +17,7 @@ class Usercard extends Component {
   }
 
   handleChat(v) {
-    console.log('chat',v);
+    // console.log('chat',v);
     this.props.history.push(`/chat/${v}`)
   }
 

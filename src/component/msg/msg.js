@@ -18,7 +18,6 @@ class Msg extends Component {
     const Brief = Item.Brief;
     const userinfo = this.props.chat.users;
     const userid = this.props.user['_id'];
-    console.log('userinfo',userinfo);
     let msgGroup = [];
     this.props.chat.msgList.forEach(v => {
       msgGroup[v.chatid] = msgGroup[v.chatid] || [];
@@ -36,7 +35,9 @@ class Msg extends Component {
           { chatList.map(item=>{
             const lastItem = this.getLastItem(item)
             const targetId = lastItem.from == userid ? lastItem.to : lastItem.from;
-            const unreadNum = item.filter(v=>!v.read && v.to ==userid).length
+            const unreadNum = item.filter(v=>!v.read && v.to == userid).length
+            console.log('item',item);
+            console.log('unreadNum',unreadNum);
             if (!userinfo[targetId]) {
               return null
             }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { List, InputItem,NavBar, Icon, Grid } from "antd-mobile";
 import { connect } from "react-redux";
-import { getMsgList ,sendMsg ,recvMsg } from "../../store/chat";
+import { getMsgList ,sendMsg ,recvMsg, readMsg } from "../../store/chat";
 import { getChatId } from "../../tools/util";
 import io from 'socket.io-client';
 
@@ -9,7 +9,7 @@ const socket = io('ws://localhost:9093')
 
 @connect(
   state => state,
-  { getMsgList,sendMsg,recvMsg }
+  { getMsgList,sendMsg,recvMsg, readMsg }
 )
 class Chat extends Component {
   constructor(props) {
@@ -26,7 +26,6 @@ class Chat extends Component {
   handleSubmit() {
     // socket.emit('sendmsg',{text:this.state.text})
     const props = this.props;
-    console.log(props.user._id);
     const from = props.user._id;
     const to = props.match.params.user;
     const msg = this.state.text;
@@ -50,6 +49,15 @@ class Chat extends Component {
     //   })
     //   console.log('recvmsg',data);
     // })
+  }
+
+  componentDidUpdate() {
+    console.log('我被更新了');
+  }
+
+  componentWillUnmount() {
+    const to = this.props.match.params.user;
+    this.props.readMsg(to);
   }
 
   fixCarousel() {
@@ -79,6 +87,7 @@ class Chat extends Component {
             this.props.history.goBack();
           }}
         >{users[userid].name}</NavBar>
+        <div className="chat-connent">
         {
           msgList.length> 0 
           ? msgList.map((v)=>{
@@ -100,6 +109,7 @@ class Chat extends Component {
           })
           : null
         }
+        </div>
         <div className="stick-footer">
           <List>
             <InputItem

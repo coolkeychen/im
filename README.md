@@ -220,3 +220,7 @@ yarn add mongoose -S
    ```
     yarn add socket.io-client --save
    ```
+23. 优化
+   * eslint 代码校验工具
+   * react16 特有的错误处理机制
+   * react 性能优化（渲染性能，服务器优化）

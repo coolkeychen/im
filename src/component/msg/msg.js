@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { List, Badge } from "antd-mobile";
 
 
+
 @connect(
   state => state
 )
@@ -23,7 +24,11 @@ class Msg extends Component {
       msgGroup[v.chatid] = msgGroup[v.chatid] || [];
       msgGroup[v.chatid].push(v)
     })
-    const chatList = Object.values(msgGroup)
+    const chatList = Object.values(msgGroup).sort((a,b) => {
+      const a_last = this.getLastItem(a).create_time;
+      const b_last = this.getLastItem(b).create_time;
+      return b_last - a_last
+    })
     // console.log('msgGroup',msgGroup)
     return (
       <div className="msg-list">
@@ -40,8 +45,12 @@ class Msg extends Component {
             return (
               <Item
                 key={lastItem._id}
-              extra={<Badge>{unreadNum}</Badge>}
+                extra={<Badge text={unreadNum}></Badge>}
                 thumb={require(`../img/${avatar}.png`)}
+                arrow="horizontal"
+                onClick={()=>{
+                  this.props.history.push(`/chat/${targetId}`)
+                }}
               >
                 { lastItem.content }
               <Brief >{ name }</Brief>

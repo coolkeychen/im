@@ -17,12 +17,14 @@ const initState = {
 export function chat(state = initState, action) {
   switch (action.type) {
     case MSG_LIST:
-      return { ...state,msgList: action.payload.msgs, unread: action.payload.msgs.filter(v => !v.read && v.to ==action.payload.userid).length ,users: action.payload.users}
+      const { msgs, userid, users } = action.payload
+      return { ...state,msgList: msgs, unread: msgs.filter(v => !v.read && v.to == userid ).length ,users: users}
     case MSG_RECV:
       const n = action.payload.msg.to == action.payload.userid ? 1 : 0;
       return { ...state, msgList: [...state.msgList, action.payload.msg],unread:state.unread + n }
     case MSG_READ:
-      return { ...state, msgList: state.msgList.map(v=> ({ ...v, read:true})),unread: state.unread - action.payload.num}
+      const {from,num} = action.payload
+      return { ...state, msgList: state.msgList.map(v=> ({ ...v,read: v.from ==from ?true :v.read})),unread: state.unread -num}
     default:
       return state
   }
